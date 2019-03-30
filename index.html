@@ -74,9 +74,8 @@
             <img src="assets/images/keylime.png" alt="keylime-logo" class="center">
             <p class="intro">Bootstrapping and Maintaining Trust in the Cloud</p>
             <div class="btns">
-                <a class="btn btn-cta-primary" href="https://asciinema.org/a/eZViK9M7yd0gD3asEVQIDi8DV" target="_blank">Demo</a>
-                <a class="btn btn-cta-primary" href="https://github.com/anteater/" target="_blank">Github</a>
-                <a class="btn btn-cta-primary" href="http://anteater.readthedocs.io/en/latest/" target="_blank">Docs</a>
+                <a class="btn btn-cta-primary" href="https://github.com/keylime/" target="_blank">Github</a>
+                <a class="btn btn-cta-primary" href="http://keylime-project.readthedocs.io/en/latest/" target="_blank">Docs</a>
                 <p></p>
             </div>
             <ul class="meta list-inline">
@@ -101,7 +100,7 @@
     <section id="about" class="about section">
         <div class="container">
             <h2 class="title text-center">What is Keylime?</h2>
-            <p class="intro text-center">Keylime is a TPM based highly scaleable remote boot attestation and runtime integrity measurement solution. Keylime enables cloud users to monitor remote nodes using a hardware based cryptographic root of trust</p>
+            <p class="intro text-center">Keylime is a TPM based highly scaleable remote boot attestation and runtime integrity measurement solution. Keylime enables cloud users to monitor remote nodes using a hardware based cryptographic root of trust.<br /> Keylime was originally born out of the security research team in MIT's Lincoln Laboratory.</p>
             <div class="row">
                 <div class="item col-md-4 col-sm-6 col-xs-12">
                     <div class="icon-holder">
@@ -111,8 +110,7 @@
                         <h3 class="sub-title">TPM 2.0</h3>
                         <p>Keylime adheres to the Trusted Computing Group TPM 2.0 specification.
                            It is built on top of the 
-                          <a href="https://github.com/tpm2-software" target="_blank">Linux TPM2 & TSS2 Software</a> 
-                          software stack and tools.
+                          <a href="https://github.com/tpm2-software" target="_blank">Linux TPM2 & TSS2 Software.</a> 
                     </div><!--//content-->
                 </div><!--//item-->
                 <div class="item col-md-4 col-sm-6 col-xs-12">
@@ -158,15 +156,60 @@
             <div class="docs-inner">
             <h2 class="title text-center">Get Started with Keylime</h2>            
             <div class="block">
+                <h3 class="sub-title text-center">Install Keylime</h3>
                 <div class="code-block">
                     <!--//Use Prismjs - http://prismjs.com/index.html#basic-usage -->
                     <pre><code class="language-markup">
-    &ltp class="my-style"&gt
-      Hello World!
-    &lt/p&gt
+git clone https://github.com/keylime/python-keylime
+cd python-keylime
+./installer.sh
                      </code></pre>
                 </div><!--//code-block-->
-            </div><!--//block-->    
+                <h3 class="sub-title text-center">Start the verifier</h3>
+                <div class="code-block">
+                    <!--//Use Prismjs - http://prismjs.com/index.html#basic-usage -->
+                    <pre><code class="language-markup">
+# keylime_verifier
+Using config file /etc/keylime.conf
+2019-03-30 10:14:57.227 - keylime.cloudverifier - INFO - Starting Cloud Verifier (tornado) on port 8881, use <Ctrl-C> to stop
+2019-03-30 10:14:57.228 - keylime.cloudverifier_common - INFO - Setting up TLS...
+2019-03-30 10:14:57.228 - keylime.cloudverifier_common - INFO - Generating a new CA in /var/lib/keylime/cv_ca and a client certificate for connecting
+2019-03-30 10:14:57.228 - keylime.cloudverifier_common - INFO - use keylime_ca -d /var/lib/keylime/cv_ca to manage this CA
+2019-03-30 10:14:57.228 - keylime.cloudverifier_common - WARNING - CAUTION: using default password for CA, please set private_key_pw to a strong password
+2019-03-30 10:14:57.278 - keylime.ca_impl_openssl - WARNING - CRL creation with openssl is not supported
+2019-03-30 10:14:57.279 - keylime.ca-util - INFO - CA certificate created successfully in /var/lib/keylime/cv_ca
+2019-03-30 10:14:57.309 - keylime.ca-util - INFO - Created certificate for name neptune successfully in /var/lib/keylime/cv_ca
+2019-03-30 10:14:57.407 - keylime.ca-util - INFO - Created certificate for name client successfully in /var/lib/keylime/cv_ca
+2019-03-30 10:14:57.409 - keylime.cloudverifier - INFO - Starting service for revocation notifications on port 8992
+                     </code></pre>
+                </div><!--//code-block-->
+                <h3 class="sub-title text-center">Start the registrar</h3>
+                <div class="code-block">
+                    <!--//Use Prismjs - http://prismjs.com/index.html#basic-usage -->
+                    <pre><code class="language-markup">
+# keylime_registrar            
+Using config file /etc/keylime.conf
+2019-03-30 10:15:44.440 - keylime.cloudverifier_common - INFO - Setting up TLS...
+2019-03-30 10:15:44.471 - keylime.registrar-common - INFO - Starting Cloud Registrar Server on ports 8890 and 8891 (TLS) use <Ctrl-C> to stop
+                     </code></pre>
+                </div><!--//code-block-->
+                <h3 class="sub-title text-center">Start the cloud node</h3>
+                <div class="code-block">
+                    <!--//Use Prismjs - http://prismjs.com/index.html#basic-usage -->
+                    <pre><code class="language-markup">
+keylime_node
+Using config file /etc/keylime.conf
+2019-03-30 10:16:40.426 - keylime.secure_mount - INFO - mounting secure storage location /var/lib/keylime/secure on tmpfs
+2019-03-30 10:16:40.502 - keylime.tpm2 - INFO - Taking ownership with config provided TPM owner password: keylime
+2019-03-30 10:16:40.587 - keylime.tpm2 - INFO - TPM Owner password confirmed: keylime
+2019-03-30 10:16:41.759 - keylime.cloudnode - INFO - Node UUID: D432FBB3-D2F1-4A97-9EF7-75BD81C00000
+2019-03-30 10:16:41.859 - keylime.registrar_client - INFO - Node registration requested for D432FBB3-D2F1-4A97-9EF7-75BD81C00000
+2019-03-30 10:16:42.289 - keylime.tpm2 - INFO - AIK activated.
+2019-03-30 10:16:42.306 - keylime.registrar_client - INFO - Registration activated for node D432FBB3-D2F1-4A97-9EF7-75BD81C00000.
+2019-03-30 10:16:42.528 - keylime.cloudnode - INFO - Starting Cloud Node on port 9002 use <Ctrl-C> to stop
+2019-03-30 10:16:42.529 - keylime.revocation_notifier - INFO - Waiting for revocation messages on 0mq 127.0.0.1:8992
+                     </code></pre>
+               </div><!--//block-->    
         </div><!--//container-->
     </section><!--//features-->
 
@@ -182,6 +225,17 @@
                  <p class="text-center">
                     <a class="btn btn-cta-primary" href="https://keylime.groups.io/g/main" target="_blank">Join the mailing list</a>
                 </p>
+            </div><!--//block-->       
+        </div><!--//container-->
+    </section><!--//features-->
+
+    <section id="contact" class="docs section">
+        <div class="container">
+            <div class="docs-inner">
+            <h2 class="title text-center">Read more about Keylime</h2>            
+            <div class="block">
+                <p class="text-center">
+                    <a class="btn btn-cta-primary" href="https://www.ll.mit.edu/sites/default/files/publication/doc/2018-04/2016_12_07_SchearN_ACSAC_FP.pdf" target="_blank">Keylime Whitepaper</a>
             </div><!--//block-->       
         </div><!--//container-->
     </section><!--//features-->
