@@ -1,4 +1,4 @@
-/*! 
+/*!
  * Template Name: devAid - Bootstrpa 4 Theme for developers
  * Version: 2.0
  * Author: Xiaoying Riley
@@ -8,6 +8,7 @@
  * Website: https://themes.3rdwavemedia.com/
 */
 /* ======= Base ======= */
+@import url(monokai.css);
 body {
   font-family: 'Lato', arial, sans-serif;
   color: #444;
