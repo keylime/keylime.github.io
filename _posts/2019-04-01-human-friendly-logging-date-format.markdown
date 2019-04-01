@@ -2,7 +2,7 @@
 layout: blog
 title:  "Human friendly logging date format"
 author: "Luke Hinds"
-date:   2019-04-01 11:22:43 +0100
+date:   2019-04-01
 ---
 Open `/etc/keylime.conf`
 
