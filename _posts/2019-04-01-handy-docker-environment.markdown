@@ -1,8 +1,8 @@
 ---
-layout: blog
+layout: post
 title:  "Handy Docker Environment for Local testing Development!"
 author: "Luke Hinds"
-date:   2019-04-01 09:22:43 +0100
+date:   2019-04-01
 ---
 The following is a guide to mounting your local repository as a Docker volume and performing a test run using a TPM simulator.
 
