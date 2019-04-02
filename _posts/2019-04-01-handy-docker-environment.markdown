@@ -73,7 +73,3 @@ while true; do
     esac
 done
 ```
-
-ToDo:
-* update with podman, once I find out why its failing with the hub.docker.io (used by our CI)
-* drop into a shell after running (helpful for debugging).
