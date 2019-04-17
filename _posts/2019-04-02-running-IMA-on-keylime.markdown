@@ -169,7 +169,7 @@ We are going to create two files. A `whitelist.txt` and an `excludes.txt`
 
 ## whitelist
 
-The whitelist is a list of what we consider to be golden values (or in fact measurements). We will use the initramfs to create our whitelist using the `create_whitelist.sh` shell script available in th python-keylime repository [here](https://github.com/keylime/python-keylime/blob/master/keylime/create_whitelist.sh) or `python-keylime/keylime/create_whitelist.sh`
+The whitelist is a list of what we consider to be golden values (or in fact measurements). We will use the initramfs to create our whitelist using the `create_whitelist.sh` shell script available in th keylime repository [here](https://github.com/keylime/keylime/blob/master/keylime/create_whitelist.sh) or `keylime/keylime/create_whitelist.sh`
 
 We will then remotely send this whitelist to the keylime verifier, which will then proceed to request quotes from the Keylime Agent. Next we will run a non-whitelisted script as root, and see how this results in the verifier revoking the monitored agent. For this we use Fedora 29, but other versions /dists can be used ( check with the community on [gitter.im](https://gitter.im/keylime-project/community) for more info.)
 
@@ -212,7 +212,7 @@ measure func=FILE_MMAP mask=MAY_EXEC
 measure func=MODULE_CHECK uid=0
 ```
 
-> Note, a copy of the above is also available in `python-keylime/demo/``
+> Note, a copy of the above is also available in `keylime/demo/``
 
 Reboot the machine to get IMA to populate `/sys/kernel/security/ima/ascii_runtime_measurements`.
 
