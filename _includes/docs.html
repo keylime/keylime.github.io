@@ -41,20 +41,20 @@ Using config file /etc/keylime.conf
 2019-03-30 10:15:44.471 - keylime.registrar-common - INFO - Starting Cloud Registrar Server on ports 8890 and 8891 (TLS) use <Ctrl-C> to stop
                  </code></pre>
             </div><!--//code-block-->
-            <h3 class="sub-title text-center">Start the cloud node</h3>
+            <h3 class="sub-title text-center">Start the cloud agent</h3>
             <div class="code-block">
                 <!--//Use Prismjs - http://prismjs.com/index.html#basic-usage -->
                 <pre><code class="language-markup">
-keylime_node
+keylime_agent
 Using config file /etc/keylime.conf
 2019-03-30 10:16:40.426 - keylime.secure_mount - INFO - mounting secure storage location /var/lib/keylime/secure on tmpfs
 2019-03-30 10:16:40.502 - keylime.tpm2 - INFO - Taking ownership with config provided TPM owner password: keylime
 2019-03-30 10:16:40.587 - keylime.tpm2 - INFO - TPM Owner password confirmed: keylime
-2019-03-30 10:16:41.759 - keylime.cloudnode - INFO - Node UUID: D432FBB3-D2F1-4A97-9EF7-75BD81C00000
-2019-03-30 10:16:41.859 - keylime.registrar_client - INFO - Node registration requested for D432FBB3-D2F1-4A97-9EF7-75BD81C00000
+2019-03-30 10:16:41.759 - keylime.cloudagent - INFO - Agent UUID: D432FBB3-D2F1-4A97-9EF7-75BD81C00000
+2019-03-30 10:16:41.859 - keylime.registrar_client - INFO - Agent registration requested for D432FBB3-D2F1-4A97-9EF7-75BD81C00000
 2019-03-30 10:16:42.289 - keylime.tpm2 - INFO - AIK activated.
-2019-03-30 10:16:42.306 - keylime.registrar_client - INFO - Registration activated for node D432FBB3-D2F1-4A97-9EF7-75BD81C00000.
-2019-03-30 10:16:42.528 - keylime.cloudnode - INFO - Starting Cloud Node on port 9002 use <Ctrl-C> to stop
+2019-03-30 10:16:42.306 - keylime.registrar_client - INFO - Registration activated for agent D432FBB3-D2F1-4A97-9EF7-75BD81C00000.
+2019-03-30 10:16:42.528 - keylime.cloudagent - INFO - Starting Cloud Agent on port 9002 use <Ctrl-C> to stop
 2019-03-30 10:16:42.529 - keylime.revocation_notifier - INFO - Waiting for revocation messages on 0mq 127.0.0.1:8992
                  </code></pre>
            </div><!--//block-->
