@@ -23,8 +23,6 @@ Using config file /etc/keylime.conf
 2019-03-30 10:14:57.228 - keylime.cloudverifier_common - INFO - Setting up TLS...
 2019-03-30 10:14:57.228 - keylime.cloudverifier_common - INFO - Generating a new CA in /var/lib/keylime/cv_ca and a client certificate for connecting
 2019-03-30 10:14:57.228 - keylime.cloudverifier_common - INFO - use keylime_ca -d /var/lib/keylime/cv_ca to manage this CA
-2019-03-30 10:14:57.228 - keylime.cloudverifier_common - WARNING - CAUTION: using default password for CA, please set private_key_pw to a strong password
-2019-03-30 10:14:57.278 - keylime.ca_impl_openssl - WARNING - CRL creation with openssl is not supported
 2019-03-30 10:14:57.279 - keylime.ca-util - INFO - CA certificate created successfully in /var/lib/keylime/cv_ca
 2019-03-30 10:14:57.309 - keylime.ca-util - INFO - Created certificate for name neptune successfully in /var/lib/keylime/cv_ca
 2019-03-30 10:14:57.407 - keylime.ca-util - INFO - Created certificate for name client successfully in /var/lib/keylime/cv_ca
@@ -45,7 +43,7 @@ Using config file /etc/keylime.conf
             <div class="code-block">
                 <!--//Use Prismjs - http://prismjs.com/index.html#basic-usage -->
                 <pre><code class="language-markup">
-keylime_node
+# keylime_node
 Using config file /etc/keylime.conf
 2019-03-30 10:16:40.426 - keylime.secure_mount - INFO - mounting secure storage location /var/lib/keylime/secure on tmpfs
 2019-03-30 10:16:40.502 - keylime.tpm2 - INFO - Taking ownership with config provided TPM owner password: keylime
