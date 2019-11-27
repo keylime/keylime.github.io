@@ -2,15 +2,22 @@
 <section id="get-started" class="docs section">
     <div class="container">
         <div class="docs-inner">
-        <h2 class="title text-center">Get Started with Keylime</h2>
+        <h2 class="title text-center">I want to try Keylime!</h2>
         <div class="block">
-            <h3 class="sub-title text-center">Install Keylime</h3>
+            <h3 class="sub-title text-center">Grab our all-in-one Ansible role with a TPM emulator</h3>
             <div class="code-block">
                 <!--//Use Prismjs - http://prismjs.com/index.html#basic-usage -->
                 <pre><code class="language-markup">
-git clone https://github.com/keylime/keylime
-cd keylime
-./installer.sh
+git clone https://github.com/keylime/ansible-keylime-tpm-emulator/
+                 </code></pre>
+            </div><!--//code-block-->
+            <h3 class="sub-title text-center">Use our Vagrantfile to stand up a VM</h3>
+            <div class="code-block">
+                <!--//Use Prismjs - http://prismjs.com/index.html#basic-usage -->
+                <pre><code class="language-markup">
+$ vagrant up --provision
+$ vagrant ssh
+$ sudo -s
                  </code></pre>
             </div><!--//code-block-->
             <h3 class="sub-title text-center">Start the verifier</h3>
@@ -20,13 +27,6 @@ cd keylime
 # keylime_verifier
 Using config file /etc/keylime.conf
 2019-03-30 10:14:57.227 - keylime.cloudverifier - INFO - Starting Keylime Verifier (tornado) on port 8881, use <Ctrl-C> to stop
-2019-03-30 10:14:57.228 - keylime.cloudverifier_common - INFO - Setting up TLS...
-2019-03-30 10:14:57.228 - keylime.cloudverifier_common - INFO - Generating a new CA in /var/lib/keylime/cv_ca and a client certificate for connecting
-2019-03-30 10:14:57.228 - keylime.cloudverifier_common - INFO - use keylime_ca -d /var/lib/keylime/cv_ca to manage this CA
-2019-03-30 10:14:57.279 - keylime.ca-util - INFO - CA certificate created successfully in /var/lib/keylime/cv_ca
-2019-03-30 10:14:57.309 - keylime.ca-util - INFO - Created certificate for name neptune successfully in /var/lib/keylime/cv_ca
-2019-03-30 10:14:57.407 - keylime.ca-util - INFO - Created certificate for name client successfully in /var/lib/keylime/cv_ca
-2019-03-30 10:14:57.409 - keylime.cloudverifier - INFO - Starting service for revocation notifications on port 8992
                  </code></pre>
             </div><!--//code-block-->
             <h3 class="sub-title text-center">Start the registrar</h3>
@@ -36,25 +36,22 @@ Using config file /etc/keylime.conf
 # keylime_registrar
 Using config file /etc/keylime.conf
 2019-03-30 10:15:44.440 - keylime.cloudverifier_common - INFO - Setting up TLS...
-2019-03-30 10:15:44.471 - keylime.registrar-common - INFO - Starting Keylime Registrar Server on ports 8890 and 8891 (TLS) use <Ctrl-C> to stop
                  </code></pre>
             </div><!--//code-block-->
-            <h3 class="sub-title text-center">Start the cloud agent</h3>
+            <h3 class="sub-title text-center">Start the keylime agent</h3>
             <div class="code-block">
                 <!--//Use Prismjs - http://prismjs.com/index.html#basic-usage -->
                 <pre><code class="language-markup">
 # keylime_agent
 Using config file /etc/keylime.conf
 2019-03-30 10:16:40.426 - keylime.secure_mount - INFO - mounting secure storage location /var/lib/keylime/secure on tmpfs
-2019-03-30 10:16:40.502 - keylime.tpm2 - INFO - Taking ownership with config provided TPM owner password: keylime
-2019-03-30 10:16:40.587 - keylime.tpm2 - INFO - TPM Owner password confirmed: keylime
-2019-03-30 10:16:41.759 - keylime.cloudagent - INFO - Agent UUID: D432FBB3-D2F1-4A97-9EF7-75BD81C00000
-2019-03-30 10:16:41.859 - keylime.registrar_client - INFO - Agent registration requested for D432FBB3-D2F1-4A97-9EF7-75BD81C00000
-2019-03-30 10:16:42.289 - keylime.tpm2 - INFO - AIK activated.
-2019-03-30 10:16:42.306 - keylime.registrar_client - INFO - Registration activated for agent D432FBB3-D2F1-4A97-9EF7-75BD81C00000.
-2019-03-30 10:16:42.528 - keylime.cloudagent - INFO - Starting Keylime Agent on port 9002 use <Ctrl-C> to stop
-2019-03-30 10:16:42.529 - keylime.revocation_notifier - INFO - Waiting for revocation messages on 0mq 127.0.0.1:8992
                  </code></pre>
+           </div><!--//block-->
+           <h2 class="title text-center">From here you can run Integrity Check Attestaion</h2>
+           <div class="block">
+               <p class="text-center">
+                   <a class="btn btn-cta-primary" href="https://keylime-docs.readthedocs.io/en/latest/user_guide/runtime_ima.html" target="_blank">Run-time Integrity Monitoring</a>
+               </p>
            </div><!--//block-->
     </div><!--//container-->
 </section><!--//features-->
