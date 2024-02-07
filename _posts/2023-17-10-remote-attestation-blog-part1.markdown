@@ -8,7 +8,7 @@ date:   2023-17-10
 # <h1 style="text-align: center; color:#6B98BF;"> 🚧 A Hitchhiker's Guide to Remote Attestation 🚧</h1>
 <!-- # $${\color{#6B98BF}🚧 A Hitchhikers Guide to Remote Attestation 🚧}$$ -->
 By: Margie Ruffin <br>
-October 17, 2023
+February 07, 2024
 
 Let’s say you have servers somewhere far away, potentially hosted by your company or some other provider, but you sometimes wonder if you could ever fully trust that no one is doing anything sketchy on them. You may ask yourself, how can I prove that my machines have not been tampered with, or how can I prove that they are being tampered with? You may wonder how you can trust them. With Remote Attestation, you don’t have to wonder; you can use existing hardware solutions to prove that the machines can be trusted and are indeed in a secure state. 
 
