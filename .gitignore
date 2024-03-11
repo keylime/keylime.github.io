@@ -4,3 +4,6 @@ _site/
 .ruby-version
 Gemfile
 Gemfile.lock
+.DS_Store
+assets/.DS_Store
+assets/images/.DS_Store
