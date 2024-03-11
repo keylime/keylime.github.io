@@ -3,54 +3,23 @@
     <div class="container">
         <div class="docs-inner">
         <h2 class="title text-center">Want to try Keylime?</h2>
+        <h3 class="sub-title text-center">Check if your device has a TPM 2.0 (on Kernel 5.6+)</h3>
+        <div class="code-block">
+                <!--//Use Prismjs - http://prismjs.com/index.html#basic-usage -->
+                <pre><code class="language-markup">
+$ cat /sys/class/tpm/tpm*/tpm_version_major
+2
+                 </code></pre>
+        <h3 class="sub-title text-center">Install the Agent, Registrar, Tenant and Verifier</h3>
         <div class="block">
-            <h3 class="sub-title text-center">Get the Ansible role with a TPM emulator</h3>
-            <div class="code-block">
-                <!--//Use Prismjs - http://prismjs.com/index.html#basic-usage -->
-                <pre><code class="language-markup">
-$ git clone https://github.com/keylime/keylime-vagrant-ansible-tpm-emulator
-                 </code></pre>
-            </div><!--//code-block-->
-            <h3 class="sub-title text-center">Use our Vagrantfile to stand up a test VM</h3>
-            <div class="code-block">
-                <!--//Use Prismjs - http://prismjs.com/index.html#basic-usage -->
-                <pre><code class="language-markup">
-$ vagrant up --provision
-$ vagrant ssh
-$ sudo -s
-                 </code></pre>
-            </div><!--//code-block-->
-            <h3 class="sub-title text-center">Start the verifier</h3>
-            <div class="code-block">
-                <!--//Use Prismjs - http://prismjs.com/index.html#basic-usage -->
-                <pre><code class="language-markup">
-# keylime_verifier
-Using config file /etc/keylime.conf
-2020-09-30 10:14:57.227 - keylime.cloudverifier - INFO - Starting Keylime Verifier (tornado) on port 8881, use <Ctrl-C> to stop
-                 </code></pre>
-            </div><!--//code-block-->
-            <h3 class="sub-title text-center">Start the registrar</h3>
-            <div class="code-block">
-                <!--//Use Prismjs - http://prismjs.com/index.html#basic-usage -->
-                <pre><code class="language-markup">
-# keylime_registrar
-Using config file /etc/keylime.conf
-2020-09-30 10:15:44.440 - keylime.cloudverifier_common - INFO - Setting up TLS...
-                 </code></pre>
-            </div><!--//code-block-->
-            <h3 class="sub-title text-center">Start the Keylime agent</h3>
-            <div class="code-block">
-                <!--//Use Prismjs - http://prismjs.com/index.html#basic-usage -->
-                <pre><code class="language-markup">
-# keylime_agent
-Using config file /etc/keylime.conf
-2020-09-30 10:16:40.426 - keylime.secure_mount - INFO - mounting secure storage location /var/lib/keylime/secure on tmpfs
-                 </code></pre>
-           </div><!--//block-->
-           <h3 class="sub-title text-center">Try out run-time attestation..</h3>
+            <p class="text-center">
+                <a class="btn btn-cta-primary" href="https://keylime.readthedocs.io/en/latest/user_guide/runtime_ima.html" target="_blank">Installation instructions</a>
+            </p>
+        </div><!--//block-->
+           <h3 class="sub-title text-center">Try out run-time attestation</h3>
            <div class="block">
                <p class="text-center">
-                   <a class="btn btn-cta-primary" href="https://keylime-docs.readthedocs.io/en/latest/user_guide/runtime_ima.html" target="_blank">Run-time setup</a>
+                   <a class="btn btn-cta-primary" href="https://keylime.readthedocs.io/en/latest/user_guide/runtime_ima.html" target="_blank">Run-time setup</a>
                </p>
            </div><!--//block-->
     </div><!--//container-->
