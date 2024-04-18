@@ -1,22 +1,16 @@
-<!-- ---
+---
 layout: blog
-title:  "A Hitchhikers Guide to Remote Attestation"
+title:  "A Hitchhikers Guide to Remote Attestation 🚧"
 author: "Margie Ruffin"
-date:   2023-17-10
---- -->
-
-# <h1 style="text-align: center; color:#6B98BF;"> 🚧 A Hitchhiker's Guide to Remote Attestation 🚧</h1>
-<!-- # $${\color{#6B98BF}🚧 A Hitchhikers Guide to Remote Attestation 🚧}$$ -->
-By: Margie Ruffin <br>
-February 07, 2024
+date:   2024-02-07
+---
 
 Let’s say you have servers somewhere far away, potentially hosted by your company or some other provider, but you sometimes wonder if you could ever fully trust that no one is doing anything sketchy on them. You may ask yourself, how can I prove that my machines have not been tampered with, or how can I prove that they are being tampered with? You may wonder how you can trust them. With Remote Attestation, you don’t have to wonder; you can use existing hardware solutions to prove that the machines can be trusted and are indeed in a secure state. 
 
 This article is Part 1 of this blog series revolving around Remote Attestation and Keylime. In this piece, we will briefly examine the concept of Remote Attestation and several of its components. In the end, I will introduce you to a software solution called Keylime, which you can use to implement this type of attestation.
 
-<br>
 
-<h3 style="text-align left; color:#6B98BF;"> Introduction to Remote Attestation </h3>
+# Introduction to Remote Attestation
 
 Cloud service providers, for example, inherently ask their customers to put significant trust in them each time they provide a service. Where does that trust come from? Why should a customer believe anything that a provider says is true? In reality, they shouldn’t unless it has been proven that their running systems have not been tampered with. Here is where Remote Attestation comes in. Attestation is designed to prove a property of a system to a third party, which, in this case, is you. It can provide proof that the execution environment can be trusted before beginning to execute code or before proceeding to deliver any secret information. 
 
@@ -26,7 +20,7 @@ Remote attestation can provide different services, such as measured boot attesta
 
 
 <div style="text-align: center;">
-<img  src="../assets/images/RemoteAttestation.png" alt="Remote Attestation Diagram">
+<img  src="/assets/images/RemoteAttestation.png" alt="Remote Attestation Diagram">
 </div>
 
 **Figure 1: Remote Attestation provides trust between an untrusted party and a trusted party. You can use services like Measured Boot Attestation and Runtime Integrity Monitoring to prove systems are trustworthy.**
@@ -40,19 +34,19 @@ In this article, we will detail the different aspects of remote attestation base
     <li> Introduction to Keylime, A Remote Attestation Software </li>
 </ul>
 
-<h3 style="text-align left; color:#6B98BF;"> What is Secure Boot? </h3>
+## What is Secure Boot?
 
 Unified Extended Firmware Interface (UEFI) Secure Boot is a security measure developed to ensure that a device is booted using only software trusted by the Original Equipment Manufacturer (OEM). The goal is to prevent malicious software from being loaded and executed early in the boot process. During secure boot, the next component is verified by the component before.
 
 Secure Boot prevents boot if the signature cannot be validated against a certificate enrolled in the bootchain. For example, if someone changes the kernel to a custom one, it is not signed by the OS vendor. This causes the boot to stop because the bootloader couldn't verify the signature. The process of checking the kernel's signatures occurs before the OS ever runs.
 
-<h3 style="text-align left; color:#6B98BF;"> What is Measured Boot? </h3>
+## What is Measured Boot?
 
 Measured boot technologies rely on a RoT, a source that can always be trusted within a cryptographic system. The RoT is a component that performs one or more security-specific functions, such as measurement, storage, reporting, verification, and/or update. It is trusted always to behave in the expected manner, because its misbehavior cannot be detected (such as by measurement) under normal operation. The RoT cannot be modified at all or cannot be modified without cryptographic credentials. 
 
 Unlike Secure Boot, Measured Boot will measure each startup component, including firmware, all the way up to the boot drivers. A hash is taken at the first step in the boot process and is extended for the next object(s) in the chain. It is stored in a chosen Platform Configuration Register (PCR), which is a memory location in the TPM. The extend operation allows for data to be appended to the value already stored in the PCR. A hash of the newly formed data is the result, and that is stored back into the PCR. The final hash can be seen as a checksum of log events. With this, an auditor can later come and validate the logs by computing the expected PCR values from the log and then comparing them to the PCR values of the TPM. One can verify the validity of the kernel because measured boot checks each component in the start-up process, and the final hash value encapsulates all of them in their present (at that time) state. With Measured Boot, the boot process is never stopped, but it provides the necessary information to detect attacks. 
 
-<h3 style="text-align left; color:#6B98BF;"> Measured Boot and Secure Boot Go Hand in Hand </h3>
+## Measured Boot and Secure Boot Go Hand in Hand
 
 These two processes go hand-in-hand to ensure a trusted Operating System (O/S) boots. Measured Boot assesses the system from the processor powering on to the point where the operating system is ready to run. The issue is that once the O/S is booted, Measured Boot stops, and its output is encapsulated into the measured boot log and the PCR values in the TPM. Now that the O/S is unguarded, it is **conceivable** that someone could manage to navigate to the boot event log, the PCRs, and the TPM and alter them retroactively. They could even go as far as to replace the TPM device with a virtual TPM. However, even if someone did manage to switch out the TPM to alter the boot event log, with the unique Endorsement Key (EK) bound to the TPM and its EK certificate signed by a trusted certificate authority, the identity of a TPM can be verified before trust is established. 
 
@@ -62,7 +56,7 @@ Measured Boot allows us to verify the configuration of Secure Boot after it has 
 
 In any production environment, many different types of nodes can be found. One can use remote attestation in combination with measured boot to determine and verifiy a platform's configuration. A measured boot reference state can be specified ahead of time for each node type and given to the remote attestation operator, along with a measured boot policy that is used to instruct the verifier on how to do the comparison. With this mechanism in place, the operator can ensure the validity of the kernels for their entire cluster. 
 
-<h3 style="text-align left; color:#6B98BF;"> Integrity Measurement Architecture (IMA) for Continuous Attestation </h3>
+## Integrity Measurement Architecture (IMA) for Continuous Attestation
 
 The two previously described aspects of Remote Attestation are helpful for a one-time check to see if the server you have provisioned was altered before it was booted and running. But what can you do if you want to continuously make sure that things aren’t being altered in real time? You can use Linux kernel's Integrity Measurement Architecture (IMA) for that. Implementing IMA with your Remote Attestation framework lets you detect if files have been accidentally or maliciously altered. With Secure and Measured Boot enabled, we established a chain of trust from the TPM, which also serves as IMA's RoT, all the way up to the running kernel. Because the kernel is now trusted, we can trust it to measure files with IMA, thus extending that trust to the files. 
 
@@ -76,17 +70,17 @@ In just a few short steps, we can see how IMA works.
 </ol>
 
 <div style="text-align: center;">
-<img  src="../assets/images/IMAVerifier.png" alt="Runtime Interigty Remote Attestation Diagram">
+<img  src="/assets/images/IMAVerifier.png" alt="Runtime Interigty Remote Attestation Diagram">
 </div>
 
 **Figure 2: We show the steps it takes to issue a verdict for a running system’s trustworthiness using Integrity Measurement Architecture (IMA).**
 
 IMA also has another capability worth mentioning. Instead of using a third party to appraise files as described above, IMA has the ability to do its own local appraisals. IMA collects file hashes and places them in kernel memory where other applications cannot access or modify them. If it were configured to do so, if a file with an IMA hash is opened for reading or executing, the appraisal extension will check to see if the contents match the stored hash. This extension forbids any operation over a specific file in case the current measurement does not match the previous one unless stated otherwise. The stored hash is the value previously stored in the measurement file within the kernel memory for that file. The ima_appraise kernel command-line parameter will determine what happens if they don't match. If it is set to "enforce," access to the file is denied, while "fix" will update the IMA xattr with the new value.
 
-<h3 style="text-align; color:#6B98BF;"> Introduction to Keylime, a Remote Attestation Framework </h3>
+# Introduction to Keylime, a Remote Attestation Framework
 
 <div style="text-align: center;">
-<img  src="../assets/images/keylime.png" alt="Keylime Logo">
+<img  src="/assets/images/keylime.png" alt="Keylime Logo">
 </div>
 
 Now that you know a little about some of the important components of Remote Attestation, I would like to introduce you to Keylime, a highly scalable, TPM-based remote boot attestation and runtime integrity measurement solution. Keylime helps to provide trust between its users and remote nodes. 
@@ -104,7 +98,7 @@ The registrar manages the agent enrollment process. Once the agent is enrolled i
 
 And lastly, the tenant is a commandline management tool by Keylime used to manage the agents. It can do various tasks, including adding or removing the agent from attestation and checking its status. If you want to read in further detail about each of the components of Keylime, see the documentation [here](https://keylime.readthedocs.io/en/latest/design/overview.html). 
 
-<h4 style="text-align: center; color:#99A3A4 ;"> Keylime and Measured Boot </h4>
+## Keylime and Measured Boot
 
 As you’ve just read, measured boot ensures that a machine has not been tampered with before it begins running any processes. Keylime makes use of recently updated kernel modules, tpm2_tools (5.0 or later), secure boot, and a “recent enough” version of grub (2.06 or later) to provide a scalable measured boot solution to clusters that could potentially have a large number of different types of nodes in a very flexible manner. 
 As you’ve just read, measured boot ensures that a machine has not been tampered with before it begins running any processes. Keylime makes use of recently updated kernel modules, tpm2_tools (5.0 or later), secure boot, and a “recent enough” version of grub (2.06 or later) to provide a scalable measured boot solution to clusters that could potentially have a large number of different types of nodes in a very flexible manner. 
@@ -117,7 +111,7 @@ For measured boot attestation to be fully useful, Keylime operators should provi
 
 If you want to read more about how to enable measured boot on Keylime, you can do that [here](https://keylime.readthedocs.io/en/latest/user_guide/use_measured_boot.html). 
 
-<h4 style="text-align: center; color:#99A3A4 ;"> Keylime, IMA, and Runtime Integrity Monitoring </h4>
+## Keylime, IMA, and Runtime Integrity Monitoring
 
 To use Keylime’s Runtime Integrity Monitoring, there are a few steps that you will need to take to either enable Linux IMA or ensure that it is already running. As we learned a few sections ago, IMA is used to measure the contents of files at runtime. However, before it can do that, you must tell it what to measure using an ***ima-policy***. In the Keylime repository, you will find an example policy that can be used, and in the documentation, you will find instructions on enabling IMA. 
 
@@ -125,7 +119,7 @@ In Keylime, a ***runtime policy*** is a list of “golden” cryptographic hashe
 
 If you want to read more about how to build a runtime policy for Keylime and then deploy it, you can do that [here](https://keylime.readthedocs.io/en/latest/user_guide/runtime_ima.html). 
 
-<h4 style="text-align: center; color:#99A3A4 ;"> How Keylime Can Help You </h4>
+## How Keylime Can Help You
 
 Remote attestation is a way to create peace of mind that you can and will detect when something is amiss inside a cluster. By building a chain of trust from hardware to software, you can ensure your data is protected. 
 
