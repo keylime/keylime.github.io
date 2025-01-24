@@ -100,8 +100,7 @@ And lastly, the tenant is a commandline management tool by Keylime used to manag
 
 ## Keylime and Measured Boot
 
-As you’ve just read, measured boot ensures that a machine has not been tampered with before it begins running any processes. Keylime makes use of recently updated kernel modules, tpm2_tools (5.0 or later), secure boot, and a “recent enough” version of grub (2.06 or later) to provide a scalable measured boot solution to clusters that could potentially have a large number of different types of nodes in a very flexible manner. 
-As you’ve just read, measured boot ensures that a machine has not been tampered with before it begins running any processes. Keylime makes use of recently updated kernel modules, tpm2_tools (5.0 or later), secure boot, and a “recent enough” version of grub (2.06 or later) to provide a scalable measured boot solution to clusters that could potentially have a large number of different types of nodes in a very flexible manner. 
+As you’ve just read, measured boot ensures that a machine has not been tampered with before it begins running any processes. Keylime makes use of recently updated kernel modules, tpm2_tools (5.0 or later), secure boot, and a “recent enough” version of grub (2.06 or later) to provide a scalable measured boot solution to clusters that could potentially have a large number of different types of nodes in a very flexible manner.
 
 Through Keylime, the Tenant specifies a “measured boot reference state” or *mb_refstate*. The Keylime Verifier uses this reference state to compare to the boot log gathered by the Keylime Agent from the kernel. 
 
